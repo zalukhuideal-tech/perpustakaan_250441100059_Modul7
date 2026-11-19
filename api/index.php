@@ -5,6 +5,12 @@ use Illuminate\Http\Request;
 
 define('LARAVEL_START', microtime(true));
 
+if (getenv('VERCEL') && ! getenv('VIEW_COMPILED_PATH')) {
+    putenv('VIEW_COMPILED_PATH=/tmp');
+    $_ENV['VIEW_COMPILED_PATH'] = '/tmp';
+    $_SERVER['VIEW_COMPILED_PATH'] = '/tmp';
+}
+
 if (file_exists($maintenance = __DIR__ . '/../storage/framework/maintenance.php')) {
     require $maintenance;
 }
