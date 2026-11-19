@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Perpustakaan Digital</title>
+    <title>Login - Perpustakaan Digital - 250441100059</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
