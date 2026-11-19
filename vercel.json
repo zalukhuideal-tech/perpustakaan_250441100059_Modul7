@@ -1,4 +1,5 @@
 {
+  "buildCommand": "npm ci && npm run build",
   "outputDirectory": "public",
   "functions": {
     "api/index.php": {
@@ -6,6 +7,9 @@
     }
   },
   "routes": [
+    {
+      "handle": "filesystem"
+    },
     {
       "src": "/(.*)",
       "dest": "/api/index.php"
