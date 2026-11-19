@@ -545,14 +545,73 @@
 @media (max-width: 650px) {
 
     .admin-sidebar {
-        width: 190px;
-        min-width: 190px;
-        padding: 22px 12px;
+        position: static;
+        width: 100%;
+        min-width: 0;
+        height: auto;
+        padding: 14px;
+        overflow: visible;
+    }
+
+    .admin-wrapper {
+        display: block;
     }
 
     .admin-main {
-        margin-left: 190px;
-        width: calc(100% - 190px);
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .admin-brand {
+        display: flex;
+        align-items: baseline;
+        gap: 10px;
+        padding: 0 0 12px;
+    }
+
+    .admin-brand h2 {
+        font-size: 18px;
+    }
+
+    .admin-brand p {
+        font-size: 12px;
+    }
+
+    .admin-role {
+        margin: 12px 0 8px;
+        font-size: 11px;
+    }
+
+    .admin-menu {
+        flex-direction: row;
+        gap: 8px;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        scrollbar-width: thin;
+    }
+
+    .admin-menu a {
+        flex: 0 0 auto;
+        padding: 10px 12px;
+        border-left: 0;
+        border-bottom: 3px solid transparent;
+        font-size: 13px;
+        white-space: nowrap;
+    }
+
+    .admin-menu a.active {
+        border-left: 0;
+        border-bottom-color: #ffffff;
+    }
+
+    .admin-sidebar-bottom {
+        margin-top: 12px;
+        padding-top: 12px;
+    }
+
+    .admin-logout-button {
+        width: auto;
+        padding: 9px 12px;
     }
 
     .admin-card-grid {
@@ -560,13 +619,19 @@
     }
 
     .admin-topbar {
-        padding: 0 14px;
+        min-height: 0;
+        padding: 14px;
         flex-wrap: wrap;
         gap: 8px;
     }
 
+    .admin-topbar-title {
+        font-size: 15px;
+    }
+
     .admin-content {
         padding: 20px 12px;
+        overflow-x: auto;
     }
 
     .admin-welcome {
@@ -575,6 +640,12 @@
 
     .admin-welcome h1 {
         font-size: 23px;
+    }
+
+    .admin-card .student-dashboard-borrowed-content,
+    .admin-card.petugas-dashboard-card {
+        align-items: flex-start;
+        flex-direction: column;
     }
 
 }
