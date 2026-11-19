@@ -12,24 +12,27 @@
 
 <body>
 
-    <div class="admin-wrapper">
+    <div class="admin-wrapper" x-data="{ mobileMenuOpen: false }" @keydown.escape.window="mobileMenuOpen = false">
 
-        {{-- SIDEBAR KIRI --}}
-        <aside class="admin-sidebar">
+        <div class="admin-mobile-overlay" x-cloak x-show="mobileMenuOpen" x-transition.opacity @click="mobileMenuOpen = false"></div>
 
-            {{-- IDENTITAS APLIKASI --}}
+        <aside id="mobile-navigation" class="admin-sidebar" :class="{ 'is-open': mobileMenuOpen }">
+
             <div class="admin-brand">
-                <h2>PERPUSTAKAAN</h2>
-                <p>Sistem Informasi</p>
+                <div>
+                    <h2>PERPUSTAKAAN</h2>
+                    <p>Sistem Informasi</p>
+                </div>
+                <button type="button" class="admin-mobile-close" @click="mobileMenuOpen = false" aria-label="Tutup menu">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
 
-            {{-- ROLE PENGGUNA --}}
             <div class="admin-role">
                 ADMINISTRATOR
             </div>
 
-            {{-- MENU SIDEBAR --}}
-            <nav class="admin-menu">
+            <nav class="admin-menu" @click="mobileMenuOpen = false">
 
                 @can('dashboard.admin')
                     <a href="{{ route('admin.dashboard') }}"
@@ -104,11 +107,15 @@
 
         </aside>
 
-        {{-- KONTEN KANAN --}}
         <main class="admin-main">
 
-            {{-- TOPBAR --}}
             <header class="admin-topbar">
+
+                <button type="button" class="admin-mobile-menu-button" @click="mobileMenuOpen = !mobileMenuOpen" :aria-expanded="mobileMenuOpen.toString()" aria-controls="mobile-navigation" aria-label="Buka menu navigasi">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
 
                 <h3 class="admin-topbar-title">
                     Sistem Informasi Perpustakaan
@@ -120,7 +127,6 @@
 
             </header>
 
-            {{-- ISI HALAMAN --}}
             <section class="admin-content">
                 {{ $slot }}
             </section>

@@ -11,21 +11,28 @@
 </head>
 
 <body>
-    <div class="admin-wrapper">
+    <div class="admin-wrapper" x-data="{ mobileMenuOpen: false }" @keydown.escape.window="mobileMenuOpen = false">
+
+        <div class="admin-mobile-overlay" x-cloak x-show="mobileMenuOpen" x-transition.opacity @click="mobileMenuOpen = false"></div>
 
         <!-- SIDEBAR PETUGAS -->
-        <aside class="admin-sidebar">
+        <aside id="mobile-navigation" class="admin-sidebar" :class="{ 'is-open': mobileMenuOpen }">
 
             <div class="admin-brand">
-                <h2>PERPUSTAKAAN</h2>
-                <p>Sistem Informasi</p>
+                <div>
+                    <h2>PERPUSTAKAAN</h2>
+                    <p>Sistem Informasi</p>
+                </div>
+                <button type="button" class="admin-mobile-close" @click="mobileMenuOpen = false" aria-label="Tutup menu">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
 
             <div class="admin-role">
                 PETUGAS
             </div>
 
-            <nav class="admin-menu">
+            <nav class="admin-menu" @click="mobileMenuOpen = false">
 
                 @can('dashboard.petugas')
                     <a href="{{ route('petugas.dashboard') }}"
@@ -94,6 +101,12 @@
         <main class="admin-main">
 
             <header class="admin-topbar">
+                <button type="button" class="admin-mobile-menu-button" @click="mobileMenuOpen = !mobileMenuOpen" :aria-expanded="mobileMenuOpen.toString()" aria-controls="mobile-navigation" aria-label="Buka menu navigasi">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
                 <h3 class="admin-topbar-title">
                     Sistem Informasi Perpustakaan
                 </h3>

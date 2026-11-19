@@ -5,6 +5,16 @@
     font-family: Arial, sans-serif;
 }
 
+[x-cloak] {
+    display: none !important;
+}
+
+.admin-mobile-overlay,
+.admin-mobile-menu-button,
+.admin-mobile-close {
+    display: none;
+}
+
 .admin-sidebar {
     position: fixed;
     top: 0;
@@ -545,16 +555,29 @@
 @media (max-width: 650px) {
 
     .admin-sidebar {
-        position: static;
-        width: 100%;
+        position: fixed;
+        z-index: 1100;
+        width: min(82vw, 310px);
         min-width: 0;
-        height: auto;
-        padding: 14px;
-        overflow: visible;
+        height: 100dvh;
+        padding: 24px 16px;
+        overflow-y: auto;
+        box-shadow: 16px 0 38px rgba(15, 23, 42, 0.24);
+        transform: translateX(-105%);
+        transition: transform 0.25s ease;
     }
 
-    .admin-wrapper {
+    .admin-sidebar.is-open {
+        transform: translateX(0);
+    }
+
+    .admin-mobile-overlay {
+        position: fixed;
+        z-index: 1050;
+        inset: 0;
         display: block;
+        background: rgba(15, 23, 42, 0.55);
+        backdrop-filter: blur(2px);
     }
 
     .admin-main {
@@ -564,9 +587,10 @@
 
     .admin-brand {
         display: flex;
-        align-items: baseline;
-        gap: 10px;
-        padding: 0 0 12px;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 0 4px 18px;
     }
 
     .admin-brand h2 {
@@ -578,30 +602,27 @@
     }
 
     .admin-role {
-        margin: 12px 0 8px;
+        margin: 18px 4px 10px;
         font-size: 11px;
     }
 
     .admin-menu {
-        flex-direction: row;
-        gap: 8px;
-        overflow-x: auto;
-        padding-bottom: 4px;
-        scrollbar-width: thin;
+        flex-direction: column;
+        gap: 6px;
+        overflow: visible;
     }
 
     .admin-menu a {
-        flex: 0 0 auto;
-        padding: 10px 12px;
-        border-left: 0;
-        border-bottom: 3px solid transparent;
-        font-size: 13px;
-        white-space: nowrap;
+        padding: 13px 14px;
+        border-left: 4px solid transparent;
+        border-bottom: 0;
+        font-size: 14px;
+        white-space: normal;
     }
 
     .admin-menu a.active {
-        border-left: 0;
-        border-bottom-color: #ffffff;
+        border-left: 4px solid #ffffff;
+        border-bottom-color: transparent;
     }
 
     .admin-sidebar-bottom {
@@ -610,8 +631,50 @@
     }
 
     .admin-logout-button {
-        width: auto;
-        padding: 9px 12px;
+        width: 100%;
+        padding: 12px 14px;
+    }
+
+    .admin-mobile-menu-button {
+        display: inline-flex;
+        flex: 0 0 auto;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        width: 42px;
+        height: 42px;
+        padding: 0;
+        border: 1px solid #e2e8f0;
+        border-radius: 10px;
+        background: #fff7f7;
+        color: #7f1d1d;
+        cursor: pointer;
+    }
+
+    .admin-mobile-menu-button span {
+        display: block;
+        width: 19px;
+        height: 2px;
+        border-radius: 2px;
+        background: currentColor;
+    }
+
+    .admin-mobile-close {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        flex: 0 0 auto;
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        border: 1px solid #b85a5a;
+        border-radius: 9px;
+        background: transparent;
+        color: #ffffff;
+        font-size: 27px;
+        line-height: 1;
+        cursor: pointer;
     }
 
     .admin-card-grid {
@@ -619,23 +682,32 @@
     }
 
     .admin-topbar {
-        min-height: 0;
-        padding: 14px;
-        flex-wrap: wrap;
-        gap: 8px;
+        min-height: 66px;
+        padding: 12px 14px;
+        gap: 12px;
     }
 
     .admin-topbar-title {
+        flex: 1;
+        min-width: 0;
         font-size: 15px;
+        line-height: 1.35;
+    }
+
+    .admin-user-name {
+        width: 100%;
+        padding-left: 54px;
+        color: #64748b;
+        font-size: 13px;
     }
 
     .admin-content {
-        padding: 20px 12px;
+        padding: 20px 14px 28px;
         overflow-x: auto;
     }
 
     .admin-welcome {
-        padding: 20px;
+        padding: 18px;
     }
 
     .admin-welcome h1 {
@@ -646,6 +718,11 @@
     .admin-card.petugas-dashboard-card {
         align-items: flex-start;
         flex-direction: column;
+    }
+
+    .admin-card {
+        min-height: 0;
+        padding: 18px;
     }
 
 }

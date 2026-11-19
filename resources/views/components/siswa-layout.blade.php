@@ -11,15 +11,22 @@
 </head>
 
 <body>
-    <div class="admin-wrapper">
+    <div class="admin-wrapper" x-data="{ mobileMenuOpen: false }" @keydown.escape.window="mobileMenuOpen = false">
+
+        <div class="admin-mobile-overlay" x-cloak x-show="mobileMenuOpen" x-transition.opacity @click="mobileMenuOpen = false"></div>
 
         {{-- SIDEBAR SISWA --}}
-        <aside class="admin-sidebar">
+        <aside id="mobile-navigation" class="admin-sidebar" :class="{ 'is-open': mobileMenuOpen }">
 
             {{-- IDENTITAS APLIKASI --}}
             <div class="admin-brand">
-                <h2>PERPUSTAKAAN</h2>
-                <p>Sistem Informasi</p>
+                <div>
+                    <h2>PERPUSTAKAAN</h2>
+                    <p>Sistem Informasi</p>
+                </div>
+                <button type="button" class="admin-mobile-close" @click="mobileMenuOpen = false" aria-label="Tutup menu">
+                    <span aria-hidden="true">×</span>
+                </button>
             </div>
 
             {{-- ROLE PENGGUNA --}}
@@ -28,7 +35,7 @@
             </div>
 
             {{-- MENU SIDEBAR --}}
-            <nav class="admin-menu">
+            <nav class="admin-menu" @click="mobileMenuOpen = false">
 
                 <a href="{{ route('siswa.dashboard') }}"
                    class="{{ request()->routeIs('siswa.dashboard') ? 'active' : '' }}">
@@ -82,6 +89,12 @@
         <main class="admin-main">
 
             {{-- TOPBAR --}}
+
+                <button type="button" class="admin-mobile-menu-button" @click="mobileMenuOpen = !mobileMenuOpen" :aria-expanded="mobileMenuOpen.toString()" aria-controls="mobile-navigation" aria-label="Buka menu navigasi">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             <header class="admin-topbar">
                 <h3 class="admin-topbar-title">
                     Sistem Informasi Perpustakaan
